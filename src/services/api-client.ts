@@ -3,10 +3,10 @@ import Consts from "./GlobalConsts";
 
 export default axios.create({
     params: {
-        key:Consts.RawGApiKey,
+        key: Consts.RawGApiKey,
     },
-    baseURL:Consts.RawGApiBaseUrl,
+    baseURL: Consts.RawGApiBaseUrl,
     //headers: {}
-})
+});
 
-export {CanceledError, AxiosError}
+export { CanceledError, AxiosError };
