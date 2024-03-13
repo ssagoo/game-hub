@@ -2,7 +2,7 @@ version: "3.4"
 services:
   web:
     ports:
-      - 8080:8080
+      - ${HOST_PORT}:${PORT}
     build: .
     tty: true
 

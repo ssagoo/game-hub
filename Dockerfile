@@ -7,19 +7,30 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Setup the Nginx Server to serve the React Application
-#FROM nginx:latest as production
-FROM nginx:1.15.2-alpine as production
+FROM nginx:1.19.10-alpine as production
+
+ENV PORT=8080
+ENV SERVER_NAME=localhost
+ENV HOST_PORT=8080
 
 RUN apk add --no-cache bash
 COPY --from=build /app/dist /usr/share/nginx/html
 
 WORKDIR /etc/nginx
-COPY ./nginx.conf .
+
+# Setup nginx main configuration template file and script to substitute env variables
+COPY ./nginx/nginx.conf.template ./templates/
+COPY ./nginx/env-nginx.sh .
+
+# Copy over the main website environment variables substitute script and default environment variables
 COPY ./env.sh .
 COPY ./.env .
+
+# Ensure scripts are executable
 RUN chmod +x env.sh
+RUN chmod +x env-nginx.sh
 
-EXPOSE 8080
+EXPOSE $PORT
 
-ENTRYPOINT ["./env.sh", "/usr/share/nginx/html"]
+ENTRYPOINT ["./env-nginx.sh", "/usr/share/nginx/html"]
 CMD ["nginx", "-g", "daemon off;"]

@@ -3,3 +3,5 @@ services:
   web:
     image: ${DOCKER_REGISTRY-}gamehub-ui
     container_name: web-container
+    env_file:
+      - .env

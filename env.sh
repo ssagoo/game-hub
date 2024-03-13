@@ -41,6 +41,4 @@ done < .env
 echo "}" >> $ENV_FILE
 
 chmod -v +x $ENV_FILE
-echo "completed writing to env file: $ENV_FILE"
-
-exec "${@:2}"
+echo "Completed writing to env file: $ENV_FILE"

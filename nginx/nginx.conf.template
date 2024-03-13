@@ -20,8 +20,9 @@ http {
     server {
         server_tokens off;
 
-        listen  8080;
-        listen [::]:8080;
+        server_name ${SERVER_NAME};
+        listen ${PORT};
+        listen [::]:${PORT};
         root    /usr/share/nginx/html;
         index index.html index.htm;
         
