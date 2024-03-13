@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "sh ./env.sh && cp env-config.js ./public/ && vite",
+    "dev-linux": "chmod +x ./env.sh && sh ./env.sh && cp env-config.js ./public/ && vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"

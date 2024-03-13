@@ -1,0 +1,5 @@
+version: "3.4"
+services:
+  web:
+    image: ${DOCKER_REGISTRY-}gamehub-ui
+    container_name: web-container
