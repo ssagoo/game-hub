@@ -7,9 +7,10 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Setup the Nginx Server to serve the React Application
-FROM nginx:1.19.10-alpine as production
+FROM nginx:1.24.0-alpine as production
 
 ENV PORT=8080
+ENV ALT_PORT=8000
 ENV SERVER_NAME=localhost
 ENV HOST_PORT=8080
 
@@ -31,6 +32,7 @@ RUN chmod +x env.sh
 RUN chmod +x env-nginx.sh
 
 EXPOSE $PORT
+EXPOSE $ALT_PORT
 
 ENTRYPOINT ["./env-nginx.sh", "/usr/share/nginx/html"]
 CMD ["nginx", "-g", "daemon off;"]
